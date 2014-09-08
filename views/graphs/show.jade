@@ -1,0 +1,12 @@
+extends ../layout
+block content
+  div.row
+    div.col-md-12
+      h1 #{graph.name}
+      p
+        | (Created at #{graph.created_at} by 
+        a(href='/users/#{user.name}') #{user.name}
+        | )
+      a(href="/nodes/new?graph_id=#{graph._id}") Add Nodes
+      br
+      a(href="/edges/new?graph_id=#{graph._id}") Add Edges

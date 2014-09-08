@@ -1,0 +1,19 @@
+extends ../layout
+block content
+  h1 #{settings.user.name}'s graphs
+  if count == 0
+    p You haven't created any graphs yet. Let's get started!
+  else
+    table(class='table table-striped')
+      tr
+        th Name
+        th Created At
+        th Options
+        for graph in graphs
+          tr
+            td
+              a(href='/graphs/#{graph._id}') #{graph.name}
+            td #{graph.created_at}
+            td
+              a(href='/graphs/#{graph._id}/destroy') Destroy
+  a(href='/graphs/new') Create a new graph

@@ -1,0 +1,14 @@
+extends ../layout
+block content
+  div.row
+    div.col-md-12
+      h1= title
+      p Create Graph
+      form.form-inline(action='/graphs/new' method='post' role='form')
+        div.form-group
+          label(for='name') Graph Name
+          input(type='name' class='form-control' id='name' placeholder='Enter a name for this graph' name='name')
+          input(type='hidden' name='user_id' value='#{settings.user._id}')
+        br
+        br
+        button(type='submit' class='btn btn-default') Create Graph

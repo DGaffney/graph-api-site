@@ -1,0 +1,39 @@
+- current_user = settings.user
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/bootstrap.js')
+  body
+    div(class='container')
+      div(class='navbar-header')
+        button(type='button' data-toggle='collapse' data-target='.navbar-collapse' class='navbar-toggle')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+        a(href='#' class='navbar-brand') Project name
+      div(class='collapse navbar-collapse')
+        ul(class='nav navbar-nav')
+          li
+            a(href='/') Home
+          li
+            a(href='/users') Users
+          li
+            a(href='/graphs') Graphs
+          if current_user
+            li
+              a(href='/users/#{current_user.name}') #{current_user.name}
+            li
+              a(href='/users/logout') Logout
+          else
+            li
+              a(href='/users/new') Signup
+            li
+              a(href='/users/login') Login
+      div(class='container')
+        if flash
+          p.text-warning #{flash}
+        block content
