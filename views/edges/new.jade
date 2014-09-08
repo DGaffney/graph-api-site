@@ -1,0 +1,15 @@
+extends ../layout
+block content
+  div.row
+    div.col-md-12
+      h1= title
+      p Create Edges
+      form.form-inline(action='/edges/new?graph_id=#{graph_id}' method='post' role='form')
+        div.form-group
+          label(for='name') Edges
+          br
+          textarea(rows='10' type='textarea' class='form-control col-md-6' id='edges' placeholder='Enter comma separated ties, separate edges by newline (ex: "1,2\n3,4" for 1->2, 3->4)' name='edges')
+          input(type='hidden' name='graph_id' value='#{graph_id}')
+        br
+        br
+        button(type='submit' class='btn btn-default') Add Nodes
