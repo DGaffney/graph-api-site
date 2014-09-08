@@ -3,10 +3,14 @@ block content
   div.row
     div.col-md-12
       h1 #{graph.name}
+      p Node Count: #{graph.node_ids.length}
+      P Edge Count: #{edge_count}
       p
-        | (Created at #{graph.created_at} by 
+        | (Created at #{created_at} by
         a(href='/users/#{user.name}') #{user.name}
         | )
       a(href="/nodes/new?graph_id=#{graph._id}") Add Nodes
       br
       a(href="/edges/new?graph_id=#{graph._id}") Add Edges
+      br
+      a(href="/graphs/#{graph._id}/download") Download GEXF

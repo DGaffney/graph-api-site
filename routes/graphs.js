@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('../modules/api');
+var request = require('request');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -22,15 +23,30 @@ router.post('/new', function(req, res){
 router.get('/:id', function(req, res){
   api.request("graph/index.json", {_id: req.params.id}, function(e, r, b){
     api.request("user/index.json", {_id: req.body.user_id}, function(error, response, body){
-      console.log(b)
-      console.log(body)
-      res.render('graphs/show', {graph: b[0], user: body[0]})
+      api.request("edge/count.json", {graph_id: req.params.id}, function(ee, rr, bb){
+        console.log(bb)
+        res.render('graphs/show', {graph: b[0], user: body[0], edge_count: bb, created_at: api.idToTime(b[0]._id)})
+      })
     })
   })
 })
 router.get('/:id/destroy', function(req, res){
   api.request("graph/destroy.json", {_id: req.params.id}, function(e,r,b){
     res.redirect('/users/'+req.session.user.name)
+  })
+})
+router.get('/:id/download', function(req, res){
+  // console.log(req.params.id)
+  // api.request('graph/download.gexf', {graph_id: req.params.id}, function(e,r,b){
+  //   console.log(e)
+  //   console.log(r)
+  //   res.render(b)
+  // })
+  request('http://0.0.0.0:8080/v1/graph/download.gexf?graph_id='+req.params.id, function (error, response, body) {
+    res.send(body)
+    if (!error && response.statusCode == 200) {
+
+    }
   })
 })
 module.exports = router;
