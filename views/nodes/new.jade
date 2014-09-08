@@ -4,7 +4,7 @@ block content
     div.col-md-12
       h1= title
       p Create Graph
-      form.form-inline(action='/nodes/new' method='post' role='form')
+      form.form-inline(action='/nodes/new?graph_id=#{graph_id}' method='post' role='form')
         div.form-group
           label(for='name') Nodes
           textarea(type='textarea' class='form-control' id='nodes' placeholder='Enter comma or newline separated node names' name='nodes')
