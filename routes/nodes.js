@@ -17,7 +17,7 @@ var node_create = function (node, callback){
 }
 router.post('/new', function(req, res){
   var node_ids = [];
-  var nodes = req.body.nodes.split(/,|\n/);
+  var nodes = req.body.nodes.split(/,|\n|\r\n/);
   var graph_id = req.body.graph_id
   async.map(nodes, node_create, function (err, result) {
     api.request('graph/add_node.json', {node_ids: result, graph_id: graph_id}, function (e, r, b){

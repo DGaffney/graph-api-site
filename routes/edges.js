@@ -12,8 +12,8 @@ router.post('/new', function(req, res){
   var submission_count = 0
   var edges = req.body.edges.split('\n')
   for (var edge in edges){
-    source = edges[edge].split(',')[0]
-    target = edges[edge].split(',')[1]
+    source = edges[edge].split(',')[0].replace(/\r/, "")
+    target = edges[edge].split(',')[1].replace(/\r/, "")
     api.request('edge/create.json', {source: source, target: target, graph_id: req.body.graph_id}, function (e, r, b){
       b
     })
