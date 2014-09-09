@@ -25,7 +25,7 @@ router.post('/new', function(req, res) {
       } else {
         api.request("user/create.json", {email: req.body.email, name: req.body.username, md5: md5(req.body.password)}, function(e, r, b){
           req.session.user = b;
-          res.render('users/new')
+          res.redirect('/users/'+req.body.username)
         })
       }
   });
@@ -64,6 +64,8 @@ router.post('/forgot', function(req, res){
           res.render('users/login', {flas: "Alright, things are looking good. Your password is now updated."})
         })
       }
+    } else {
+      res.render('users/forgot', {flash: "Sorry, but you got the secret admin-provided password wrong. Please contact Devin"})
     }
   })
 })
