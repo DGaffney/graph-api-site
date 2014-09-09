@@ -25,11 +25,11 @@ app.set("view options", { layout: "layout.jade" });
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true}))
+app.use(bodyParser.urlencoded({limit: '50mb'}));
 
 app.use(function(req, res, next) {
     app.set('user', req.session.user);
@@ -42,8 +42,6 @@ app.use('/users', users);
 app.use('/graphs', graphs);
 app.use('/nodes', nodes);
 app.use('/edges', edges);
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({limit: '5mb'}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

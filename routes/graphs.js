@@ -48,18 +48,4 @@ router.get('/:id/download', function(req, res){
     }
   })
 })
-
-router.get('/:id/download_file', function(req, res) {
-    var doc = new PDFDocument();
-    // ...
-
-    doc.output(function(buf) { // as of PDFKit v0.2.1 -- see edit history for older versions
-        res.writeHead(200, {
-             'Content-Type': 'application/pdf',
-             'Cache-Control': 'private',
-             'Content-Length': buf.length
-        });
-        res.end(buf);
-    });
-});
 module.exports = router;

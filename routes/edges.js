@@ -10,6 +10,7 @@ router.get('/new', function(req, res){
 })
 router.post('/new', function(req, res){
   var submission_count = 0
+  console.log(req)
   var edges = req.body.edges.split('\n')
   for (var edge in edges){
     source = edges[edge].split(',')[0].replace(/\r/, "")
