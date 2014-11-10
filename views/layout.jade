@@ -21,8 +21,6 @@ html
             a(href='/') Home
           li
             a(href='/users') Users
-          li
-            a(href='/graphs') Graphs
           if current_user
             li
               a(href='/users/#{current_user.name}') #{current_user.name}
