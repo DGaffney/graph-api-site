@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
         if (error) {
             //handle the error
         }
-        res.render('users/index', { title: 'Butts', data: body});
+        res.render('users/index', { title: 'Users', data: body});
     });
 });
 router.get('/new', function(req, res) {
