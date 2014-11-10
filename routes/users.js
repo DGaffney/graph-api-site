@@ -36,11 +36,11 @@ router.get('/login', function(req, res){
 })
 router.post('/login', function(req, res){
   api.request("user/index.json", {name: req.body.username}, function(error, response, body) {
-    if (body[0].md5 == md5(req.body.password)){
+    if (body[0] && body[0].md5 == md5(req.body.password)){
       req.session.user = body[0];
       res.redirect('/users/'+req.session.user.name)
     } else {
-      res.render('users/login', {flash: "Sorry, but your password didn't seem to check out..."});
+      res.render('users/login', {flash: "Sorry, but your username/password didn't seem to check out... Check case sensitivity?"});
     }
   })
 })
